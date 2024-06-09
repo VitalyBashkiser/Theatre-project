@@ -1,25 +1,18 @@
-from rest_framework import viewsets
-from api.models import (
-    Actor,
-    Genre,
-    Play,
-    TheatreHall,
-    Performance,
-    Reservation,
-    Ticket,
-)
+from rest_framework import viewsets, mixins, generics
+from api.models import Actor, Genre, Play, TheatreHall, Performance, Reservation, Ticket
 from api.serializers import (
-    ActorSerializer,
-    GenreSerializer,
-    PlaySerializer,
-    TheatreHallSerializer,
-    PerformanceSerializer,
-    ReservationSerializer,
-    TicketSerializer,
+    ActorSerializer, GenreSerializer, PlaySerializer, TheatreHallSerializer,
+    PerformanceSerializer, ReservationSerializer, TicketSerializer
 )
+from rest_framework.permissions import IsAuthenticated
 
 
-class ActorViewSet(viewsets.ModelViewSet):
+class ActorListCreateView(generics.ListCreateAPIView):
+    queryset = Actor.objects.all()
+    serializer_class = ActorSerializer
+
+
+class ActorRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
 
@@ -39,7 +32,12 @@ class TheatreHallViewSet(viewsets.ModelViewSet):
     serializer_class = TheatreHallSerializer
 
 
-class PerformanceViewSet(viewsets.ModelViewSet):
+class PerformanceListCreateView(generics.ListCreateAPIView):
+    queryset = Performance.objects.all()
+    serializer_class = PerformanceSerializer
+
+
+class PerformanceRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Performance.objects.all()
     serializer_class = PerformanceSerializer
 
@@ -47,8 +45,10 @@ class PerformanceViewSet(viewsets.ModelViewSet):
 class ReservationViewSet(viewsets.ModelViewSet):
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class TicketViewSet(viewsets.ModelViewSet):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
+    permission_classes = [IsAuthenticated]
