@@ -2,23 +2,27 @@ version: '3.10'
 
 services:
   db:
-    image: postgres:13
+    image: postgres:16.0-alpine3.17
+    restart: always
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: theatre_db
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      - postgres_data:$PGDATA
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
 
-  web:
-    build: .
-    command: >
-      sh -c "python manage.py migrate &&
-            python manage.py runserver 0.0.0.0:8080"
+  theater:
+    build:
+      context: .
+    env_file:
+      - .env
     volumes:
       - .:/app
     ports:
       - "8081:8080"
+    command: >
+      sh -c "python manage.py migrate &&
+            python manage.py runserver 0.0.0.0:8080"
     depends_on:
       - db
 

@@ -1,8 +1,21 @@
 from rest_framework import viewsets, mixins, generics
-from api.models import Actor, Genre, Play, TheatreHall, Performance, Reservation, Ticket
+from api.models import (
+    Actor,
+    Genre,
+    Play,
+    TheatreHall,
+    Performance,
+    Reservation,
+    Ticket,
+)
 from api.serializers import (
-    ActorSerializer, GenreSerializer, PlaySerializer, TheatreHallSerializer,
-    PerformanceSerializer, ReservationSerializer, TicketSerializer
+    ActorSerializer,
+    GenreSerializer,
+    PlaySerializer,
+    TheatreHallSerializer,
+    PerformanceSerializer,
+    ReservationSerializer,
+    TicketSerializer,
 )
 from rest_framework.permissions import IsAuthenticated
 
@@ -37,7 +50,9 @@ class PerformanceListCreateView(generics.ListCreateAPIView):
     serializer_class = PerformanceSerializer
 
 
-class PerformanceRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+class PerformanceRetrieveUpdateDestroyView(
+    generics.RetrieveUpdateDestroyAPIView
+):
     queryset = Performance.objects.all()
     serializer_class = PerformanceSerializer
 
