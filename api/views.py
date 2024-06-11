@@ -1,4 +1,4 @@
-from rest_framework import viewsets, mixins, generics
+from rest_framework import viewsets, generics
 from api.models import (
     Actor,
     Genre,
