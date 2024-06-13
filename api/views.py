@@ -20,7 +20,7 @@ from api.serializers import (
 from rest_framework.permissions import IsAuthenticated
 
 
-class ActorListCreateView(generics.ListCreateAPIView):
+class ActorViewSet(viewsets.ModelViewSet):
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
 
