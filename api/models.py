@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -51,7 +52,7 @@ class Performance(models.Model):
 
 class Reservation(models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="reservations"
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="reservations"
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
