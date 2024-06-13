@@ -5,7 +5,7 @@ from api.models import Actor
 
 class TheatreTests(APITestCase):
     def setUp(self):
-        self.url = '/api/theatre/actors/'
+        self.url = "/api/theatre/actors/"
 
     def test_create_actor(self):
         data = {"first_name": "John", "last_name": "Doe"}
