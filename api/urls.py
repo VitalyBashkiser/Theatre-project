@@ -6,15 +6,16 @@ from api.views import (
     TheatreHallViewSet,
     ReservationViewSet,
     TicketViewSet,
-    ActorListCreateView,
     ActorRetrieveUpdateDestroyView,
     PerformanceListCreateView,
     PerformanceRetrieveUpdateDestroyView,
+    ActorViewSet,
 )
 
 app_name = "api"
 
 router = DefaultRouter()
+router.register(r"actors", ActorViewSet)
 router.register(r"genres", GenreViewSet)
 router.register(r"plays", PlayViewSet)
 router.register(r"theatre-halls", TheatreHallViewSet)
@@ -23,7 +24,6 @@ router.register(r"tickets", TicketViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("actors/", ActorListCreateView.as_view(), name="actor-list-create"),
     path(
         "actors/<int:pk>/",
         ActorRetrieveUpdateDestroyView.as_view(),
